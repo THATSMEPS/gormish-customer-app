@@ -1015,6 +1015,7 @@ import { LoginPopup } from './components/LoginPopup';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { CuisineGrid } from './components/CuisineGrid';
 import { PhonePopup } from './components/PhonePopup';
+import useWebViewMessage from './hooks/useWebViewMessage';
 
 const RestaurantPageWrapper = () => {
   const { restaurantId } = useParams();
@@ -1432,6 +1433,9 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [currentCustomerId, setCurrentCustomerId] = useState<string | null>(null);
+
+  // Send APP_READY message to React Native WebView
+  useWebViewMessage({ type: 'APP_READY' });
 
   useEffect(() => {
     const checkAuthToken = () => {
